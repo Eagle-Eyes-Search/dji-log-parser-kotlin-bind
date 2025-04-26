@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["dji-log-parser", "dji-log-cli", "dji-log-parser-kotlin"]
+members = ["dji-log-parser", "dji-log-cli", "dji-log-parser-bindings"]
 
 [workspace.package]
 authors = ["Luc Vauvillier <luc.vauvillier@gmail.com>"]

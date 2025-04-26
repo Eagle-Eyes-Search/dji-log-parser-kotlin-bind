@@ -546,7 +546,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "dji-log-parser-kotlin"
+name = "dji-log-parser-bindings"
 version = "0.5.7"
 dependencies = [
  "chrono",
