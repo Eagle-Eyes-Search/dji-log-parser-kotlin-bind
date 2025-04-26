@@ -1,5 +1,5 @@
 [package]
-name = "dji-log-parser-kotlin"
+name = "dji-log-parser-bindings"
 authors.workspace = true
 edition.workspace = true
 version.workspace = true
@@ -19,7 +19,7 @@ uniffi = { version = "0.29", features = ["build"] }
 
 [lib]
 crate-type = ["cdylib"]
-name = "dji_log_parser_kotlin"
+name = "dji_log_parser_binding"
 
 [[bin]]
 name = "uniffi-bindgen"
