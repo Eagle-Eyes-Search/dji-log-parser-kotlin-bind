@@ -156,7 +156,7 @@ mod utils;
 pub use error::{Error, Result};
 use frame::{records_to_frames, Frame};
 use keychain::{EncodedKeychainFeaturePoint, Keychain, KeychainFeaturePoint, KeychainsRequest};
-use layout::auxiliary::Auxiliary;
+use layout::auxiliary::{Auxiliary, Department};
 use layout::details::Details;
 use layout::prefix::Prefix;
 use record::Record;
@@ -245,6 +245,32 @@ impl DJILog {
     /// instance, which contains the necessary information to fetch keychains from the DJI API.
     ///
     pub fn keychains_request(&self) -> Result<KeychainsRequest> {
+        self.keychains_request_with_custom_params(None, None)
+    }
+
+    /// Creates a `KeychainsRequest` object by parsing `KeyStorage` records with manually specified params.
+    ///
+    /// This function is used to build a request body for manually retrieving the keychain from the DJI API.
+    /// Keychains are required to decode records for logs with a version greater than or equal to 13.
+    /// For earlier versions, this function returns a default `KeychainsRequest`.
+    ///
+    /// # Arguments
+    ///
+    /// * `department` - An optional `Department` to manually set in the request. If `None`, the department
+    ///   will be determined from the log file.
+    /// * `version` - An optional version number to manually set in the request. If `None`, the version
+    ///   will be determined from the log file.
+    ///
+    /// # Returns
+    ///
+    /// Returns a `Result<KeychainsRequest>`. On success, it provides a `KeychainsRequest`
+    /// instance, which contains the necessary information to fetch keychains from the DJI API.
+    ///
+    pub fn keychains_request_with_custom_params(
+        &self,
+        department: Option<Department>,
+        version: Option<u16>,
+    ) -> Result<KeychainsRequest> {
         let mut keychain_request = KeychainsRequest::default();
 
         // No keychain
@@ -260,8 +286,16 @@ impl DJILog {
 
         // Get version from second auxilliary block
         if let Auxiliary::Version(data) = Auxiliary::read(&mut cursor)? {
-            keychain_request.version = data.version;
-            keychain_request.department = data.department.into();
+            // Use provided version or determine from log
+            keychain_request.version = version.unwrap_or(data.version);
+            // Use provided department or determine from log
+            keychain_request.department = match department {
+                Some(dept) => dept.into(),
+                None => match data.department {
+                    Department::Unknown(_) => Department::DJIFly.into(),
+                    _ => data.department.into(),
+                },
+            };
         } else {
             return Err(Error::MissingAuxilliaryData("Version".into()));
         }

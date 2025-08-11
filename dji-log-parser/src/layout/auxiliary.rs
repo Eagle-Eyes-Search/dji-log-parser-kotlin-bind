@@ -6,7 +6,7 @@ use crate::decoder::XorDecoder;
 #[binread]
 #[derive(Debug)]
 #[br(little)]
-pub enum Auxiliary {
+pub(crate) enum Auxiliary {
     #[br(magic = 0u8)]
     Info(
         #[br(temp)] u16,
@@ -23,7 +23,7 @@ pub enum Auxiliary {
 #[binread]
 #[derive(Debug)]
 #[br(little)]
-pub struct AuxiliaryInfo {
+pub(crate) struct AuxiliaryInfo {
     pub version_data: u8,
     #[br(temp)]
     info_length: u16,
@@ -38,7 +38,7 @@ pub struct AuxiliaryInfo {
 #[binread]
 #[derive(Debug)]
 #[br(little)]
-pub struct AuxiliaryVersion {
+pub(crate) struct AuxiliaryVersion {
     pub version: u16,
     #[br(map = |x: u8| Department::from(x))]
     pub department: Department,
@@ -46,6 +46,8 @@ pub struct AuxiliaryVersion {
 
 #[derive(Serialize, Debug, Clone, PartialEq)]
 pub enum Department {
+    SDK,
+    DJIGO,
     DJIFly,
     AgriculturalMachinery,
     Terra,
@@ -59,6 +61,8 @@ pub enum Department {
 impl From<u8> for Department {
     fn from(num: u8) -> Self {
         match num {
+            1 => Department::SDK,
+            2 => Department::DJIGO,
             3 => Department::DJIFly,
             4 => Department::AgriculturalMachinery,
             5 => Department::Terra,
@@ -73,6 +77,8 @@ impl From<u8> for Department {
 impl From<Department> for u8 {
     fn from(department: Department) -> Self {
         match department {
+            Department::SDK => 1,
+            Department::DJIGO => 2,
             Department::DJIFly => 3,
             Department::AgriculturalMachinery => 4,
             Department::Terra => 5,
