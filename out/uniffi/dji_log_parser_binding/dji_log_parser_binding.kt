@@ -3,7 +3,7 @@
 
 @file:Suppress("NAME_SHADOWING")
 
-package uniffi.dji_log_parser_kotlin
+package uniffi.dji_log_parser_binding
 
 // Common helper code.
 //
@@ -59,7 +59,7 @@ open class RustBuffer : Structure() {
     companion object {
         internal fun alloc(size: ULong = 0UL) = uniffiRustCall() { status ->
             // Note: need to convert the size to a `Long` value to make this work with JVM.
-            UniffiLib.INSTANCE.ffi_dji_log_parser_kotlin_rustbuffer_alloc(size.toLong(), status)
+            UniffiLib.INSTANCE.ffi_dji_log_parser_binding_rustbuffer_alloc(size.toLong(), status)
         }.also {
             if(it.data == null) {
                throw RuntimeException("RustBuffer.alloc() returned null data pointer (size=${size})")
@@ -75,7 +75,7 @@ open class RustBuffer : Structure() {
         }
 
         internal fun free(buf: RustBuffer.ByValue) = uniffiRustCall() { status ->
-            UniffiLib.INSTANCE.ffi_dji_log_parser_kotlin_rustbuffer_free(buf, status)
+            UniffiLib.INSTANCE.ffi_dji_log_parser_binding_rustbuffer_free(buf, status)
         }
     }
 
@@ -375,7 +375,7 @@ private fun findLibraryName(componentName: String): String {
     if (libOverride != null) {
         return libOverride
     }
-    return "dji_log_parser_kotlin"
+    return "dji_log_parser_binding"
 }
 
 private inline fun <reified Lib : Library> loadIndirect(
@@ -743,21 +743,21 @@ internal interface UniffiForeignFutureCompleteVoid : com.sun.jna.Callback {
 // when the library is loaded.
 internal interface IntegrityCheckingUniffiLib : Library {
     // Integrity check functions only
-    fun uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_details(
+    fun uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_details(
 ): Short
-fun uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_fetch_keychains(
+fun uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_fetch_keychains(
 ): Short
-fun uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_frames(
+fun uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_frames(
 ): Short
-fun uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_keychains_request(
+fun uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_keychains_request(
 ): Short
-fun uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_records(
+fun uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_records(
 ): Short
-fun uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_version(
+fun uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_version(
 ): Short
-fun uniffi_dji_log_parser_kotlin_checksum_constructor_djilogwrapper_from_bytes(
+fun uniffi_dji_log_parser_binding_checksum_constructor_djilogwrapper_from_bytes(
 ): Short
-fun ffi_dji_log_parser_kotlin_uniffi_contract_version(
+fun ffi_dji_log_parser_binding_uniffi_contract_version(
 ): Int
 
 }
@@ -767,7 +767,7 @@ fun ffi_dji_log_parser_kotlin_uniffi_contract_version(
 internal interface UniffiLib : Library {
     companion object {
         internal val INSTANCE: UniffiLib by lazy {
-            val componentName = "dji_log_parser_kotlin"
+            val componentName = "dji_log_parser_binding"
             // For large crates we prevent `MethodTooLargeException` (see #2340)
             // N.B. the name of the extension is very misleading, since it is 
             // rather `InterfaceTooLargeException`, caused by too many methods 
@@ -806,135 +806,135 @@ internal interface UniffiLib : Library {
     }
 
     // FFI functions
-    fun uniffi_dji_log_parser_kotlin_fn_clone_djilogwrapper(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
+    fun uniffi_dji_log_parser_binding_fn_clone_djilogwrapper(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
 ): Pointer
-fun uniffi_dji_log_parser_kotlin_fn_free_djilogwrapper(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_dji_log_parser_binding_fn_free_djilogwrapper(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
 ): Unit
-fun uniffi_dji_log_parser_kotlin_fn_constructor_djilogwrapper_from_bytes(`bytes`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_dji_log_parser_binding_fn_constructor_djilogwrapper_from_bytes(`bytes`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): Pointer
-fun uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_details(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_dji_log_parser_binding_fn_method_djilogwrapper_details(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_fetch_keychains(`ptr`: Pointer,`apiKey`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_dji_log_parser_binding_fn_method_djilogwrapper_fetch_keychains(`ptr`: Pointer,`apiKey`: RustBuffer.ByValue,`departmentWrapper`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_frames(`ptr`: Pointer,`keychains`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_dji_log_parser_binding_fn_method_djilogwrapper_frames(`ptr`: Pointer,`keychains`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_keychains_request(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_dji_log_parser_binding_fn_method_djilogwrapper_keychains_request(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_records(`ptr`: Pointer,`keychains`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_dji_log_parser_binding_fn_method_djilogwrapper_records(`ptr`: Pointer,`keychains`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_version(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_dji_log_parser_binding_fn_method_djilogwrapper_version(`ptr`: Pointer,uniffi_out_err: UniffiRustCallStatus, 
 ): Byte
-fun ffi_dji_log_parser_kotlin_rustbuffer_alloc(`size`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rustbuffer_alloc(`size`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_dji_log_parser_kotlin_rustbuffer_from_bytes(`bytes`: ForeignBytes.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rustbuffer_from_bytes(`bytes`: ForeignBytes.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_dji_log_parser_kotlin_rustbuffer_free(`buf`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rustbuffer_free(`buf`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): Unit
-fun ffi_dji_log_parser_kotlin_rustbuffer_reserve(`buf`: RustBuffer.ByValue,`additional`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rustbuffer_reserve(`buf`: RustBuffer.ByValue,`additional`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_dji_log_parser_kotlin_rust_future_poll_u8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_u8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_u8(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_u8(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_u8(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_u8(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_u8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_u8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Byte
-fun ffi_dji_log_parser_kotlin_rust_future_poll_i8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_i8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_i8(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_i8(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_i8(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_i8(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_i8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_i8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Byte
-fun ffi_dji_log_parser_kotlin_rust_future_poll_u16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_u16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_u16(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_u16(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_u16(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_u16(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_u16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_u16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Short
-fun ffi_dji_log_parser_kotlin_rust_future_poll_i16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_i16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_i16(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_i16(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_i16(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_i16(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_i16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_i16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Short
-fun ffi_dji_log_parser_kotlin_rust_future_poll_u32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_u32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_u32(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_u32(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_u32(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_u32(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_u32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_u32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Int
-fun ffi_dji_log_parser_kotlin_rust_future_poll_i32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_i32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_i32(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_i32(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_i32(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_i32(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_i32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_i32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Int
-fun ffi_dji_log_parser_kotlin_rust_future_poll_u64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_u64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_u64(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_u64(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_u64(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_u64(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_u64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_u64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Long
-fun ffi_dji_log_parser_kotlin_rust_future_poll_i64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_i64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_i64(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_i64(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_i64(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_i64(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_i64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_i64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Long
-fun ffi_dji_log_parser_kotlin_rust_future_poll_f32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_f32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_f32(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_f32(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_f32(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_f32(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_f32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_f32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Float
-fun ffi_dji_log_parser_kotlin_rust_future_poll_f64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_f64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_f64(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_f64(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_f64(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_f64(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_f64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_f64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Double
-fun ffi_dji_log_parser_kotlin_rust_future_poll_pointer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_pointer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_pointer(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_pointer(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_pointer(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_pointer(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_pointer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_pointer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Pointer
-fun ffi_dji_log_parser_kotlin_rust_future_poll_rust_buffer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_rust_buffer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_rust_buffer(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_rust_buffer(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_rust_buffer(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_rust_buffer(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_rust_buffer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_rust_buffer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_dji_log_parser_kotlin_rust_future_poll_void(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_dji_log_parser_binding_rust_future_poll_void(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_cancel_void(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_cancel_void(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_free_void(`handle`: Long,
+fun ffi_dji_log_parser_binding_rust_future_free_void(`handle`: Long,
 ): Unit
-fun ffi_dji_log_parser_kotlin_rust_future_complete_void(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_dji_log_parser_binding_rust_future_complete_void(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Unit
 
 }
@@ -943,32 +943,32 @@ private fun uniffiCheckContractApiVersion(lib: IntegrityCheckingUniffiLib) {
     // Get the bindings contract version from our ComponentInterface
     val bindings_contract_version = 29
     // Get the scaffolding contract version by calling the into the dylib
-    val scaffolding_contract_version = lib.ffi_dji_log_parser_kotlin_uniffi_contract_version()
+    val scaffolding_contract_version = lib.ffi_dji_log_parser_binding_uniffi_contract_version()
     if (bindings_contract_version != scaffolding_contract_version) {
         throw RuntimeException("UniFFI contract version mismatch: try cleaning and rebuilding your project")
     }
 }
 @Suppress("UNUSED_PARAMETER")
 private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
-    if (lib.uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_details() != 5256.toShort()) {
+    if (lib.uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_details() != 40372.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_fetch_keychains() != 54690.toShort()) {
+    if (lib.uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_fetch_keychains() != 47598.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_frames() != 39778.toShort()) {
+    if (lib.uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_frames() != 37871.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_keychains_request() != 59458.toShort()) {
+    if (lib.uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_keychains_request() != 8643.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_records() != 14651.toShort()) {
+    if (lib.uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_records() != 47140.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_dji_log_parser_kotlin_checksum_method_djilogwrapper_version() != 34055.toShort()) {
+    if (lib.uniffi_dji_log_parser_binding_checksum_method_djilogwrapper_version() != 42293.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_dji_log_parser_kotlin_checksum_constructor_djilogwrapper_from_bytes() != 57731.toShort()) {
+    if (lib.uniffi_dji_log_parser_binding_checksum_constructor_djilogwrapper_from_bytes() != 50341.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
 }
@@ -1049,6 +1049,70 @@ inline fun <T : Disposable?, R> T.use(block: (T) -> R) =
  * @suppress
  * */
 object NoPointer
+/**
+ * The cleaner interface for Object finalization code to run.
+ * This is the entry point to any implementation that we're using.
+ *
+ * The cleaner registers objects and returns cleanables, so now we are
+ * defining a `UniffiCleaner` with a `UniffiClenaer.Cleanable` to abstract the
+ * different implmentations available at compile time.
+ *
+ * @suppress
+ */
+interface UniffiCleaner {
+    interface Cleanable {
+        fun clean()
+    }
+
+    fun register(value: Any, cleanUpTask: Runnable): UniffiCleaner.Cleanable
+
+    companion object
+}
+
+// The fallback Jna cleaner, which is available for both Android, and the JVM.
+private class UniffiJnaCleaner : UniffiCleaner {
+    private val cleaner = com.sun.jna.internal.Cleaner.getCleaner()
+
+    override fun register(value: Any, cleanUpTask: Runnable): UniffiCleaner.Cleanable =
+        UniffiJnaCleanable(cleaner.register(value, cleanUpTask))
+}
+
+private class UniffiJnaCleanable(
+    private val cleanable: com.sun.jna.internal.Cleaner.Cleanable,
+) : UniffiCleaner.Cleanable {
+    override fun clean() = cleanable.clean()
+}
+
+
+// We decide at uniffi binding generation time whether we were
+// using Android or not.
+// There are further runtime checks to chose the correct implementation
+// of the cleaner.
+private fun UniffiCleaner.Companion.create(): UniffiCleaner =
+    try {
+        // For safety's sake: if the library hasn't been run in android_cleaner = true
+        // mode, but is being run on Android, then we still need to think about
+        // Android API versions.
+        // So we check if java.lang.ref.Cleaner is there, and use that…
+        java.lang.Class.forName("java.lang.ref.Cleaner")
+        JavaLangRefCleaner()
+    } catch (e: ClassNotFoundException) {
+        // … otherwise, fallback to the JNA cleaner.
+        UniffiJnaCleaner()
+    }
+
+private class JavaLangRefCleaner : UniffiCleaner {
+    val cleaner = java.lang.ref.Cleaner.create()
+
+    override fun register(value: Any, cleanUpTask: Runnable): UniffiCleaner.Cleanable =
+        JavaLangRefCleanable(cleaner.register(value, cleanUpTask))
+}
+
+private class JavaLangRefCleanable(
+    val cleanable: java.lang.ref.Cleaner.Cleanable
+) : UniffiCleaner.Cleanable {
+    override fun clean() = cleanable.clean()
+}
 
 /**
  * @suppress
@@ -1410,70 +1474,6 @@ public object FfiConverterByteArray: FfiConverterRustBuffer<ByteArray> {
 
 
 /**
- * The cleaner interface for Object finalization code to run.
- * This is the entry point to any implementation that we're using.
- *
- * The cleaner registers objects and returns cleanables, so now we are
- * defining a `UniffiCleaner` with a `UniffiClenaer.Cleanable` to abstract the
- * different implmentations available at compile time.
- *
- * @suppress
- */
-interface UniffiCleaner {
-    interface Cleanable {
-        fun clean()
-    }
-
-    fun register(value: Any, cleanUpTask: Runnable): UniffiCleaner.Cleanable
-
-    companion object
-}
-
-// The fallback Jna cleaner, which is available for both Android, and the JVM.
-private class UniffiJnaCleaner : UniffiCleaner {
-    private val cleaner = com.sun.jna.internal.Cleaner.getCleaner()
-
-    override fun register(value: Any, cleanUpTask: Runnable): UniffiCleaner.Cleanable =
-        UniffiJnaCleanable(cleaner.register(value, cleanUpTask))
-}
-
-private class UniffiJnaCleanable(
-    private val cleanable: com.sun.jna.internal.Cleaner.Cleanable,
-) : UniffiCleaner.Cleanable {
-    override fun clean() = cleanable.clean()
-}
-
-
-// We decide at uniffi binding generation time whether we were
-// using Android or not.
-// There are further runtime checks to chose the correct implementation
-// of the cleaner.
-private fun UniffiCleaner.Companion.create(): UniffiCleaner =
-    try {
-        // For safety's sake: if the library hasn't been run in android_cleaner = true
-        // mode, but is being run on Android, then we still need to think about
-        // Android API versions.
-        // So we check if java.lang.ref.Cleaner is there, and use that…
-        java.lang.Class.forName("java.lang.ref.Cleaner")
-        JavaLangRefCleaner()
-    } catch (e: ClassNotFoundException) {
-        // … otherwise, fallback to the JNA cleaner.
-        UniffiJnaCleaner()
-    }
-
-private class JavaLangRefCleaner : UniffiCleaner {
-    val cleaner = java.lang.ref.Cleaner.create()
-
-    override fun register(value: Any, cleanUpTask: Runnable): UniffiCleaner.Cleanable =
-        JavaLangRefCleanable(cleaner.register(value, cleanUpTask))
-}
-
-private class JavaLangRefCleanable(
-    val cleanable: java.lang.ref.Cleaner.Cleanable
-) : UniffiCleaner.Cleanable {
-    override fun clean() = cleanable.clean()
-}
-/**
  * A wrapper around the DJI log parser for Kotlin bindings
  */
 public interface DjiLogWrapperInterface {
@@ -1486,7 +1486,7 @@ public interface DjiLogWrapperInterface {
     /**
      * Fetches keychains using the provided API key
      */
-    fun `fetchKeychains`(`apiKey`: kotlin.String): List<List<KeychainFeaturePointWrapper>>
+    fun `fetchKeychains`(`apiKey`: kotlin.String, `departmentWrapper`: DepartmentWrapper): List<List<KeychainFeaturePointWrapper>>
     
     /**
      * Retrieves the normalized frames from the DJI log
@@ -1584,7 +1584,7 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
         override fun run() {
             pointer?.let { ptr ->
                 uniffiRustCall { status ->
-                    UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_free_djilogwrapper(ptr, status)
+                    UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_free_djilogwrapper(ptr, status)
                 }
             }
         }
@@ -1592,7 +1592,7 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
 
     fun uniffiClonePointer(): Pointer {
         return uniffiRustCall() { status ->
-            UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_clone_djilogwrapper(pointer!!, status)
+            UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_clone_djilogwrapper(pointer!!, status)
         }
     }
 
@@ -1603,7 +1603,7 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
             return FfiConverterTypeDetailsWrapper.lift(
     callWithPointer {
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_details(
+    UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_method_djilogwrapper_details(
         it, _status)
 }
     }
@@ -1615,12 +1615,12 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
     /**
      * Fetches keychains using the provided API key
      */
-    @Throws(DjiException::class)override fun `fetchKeychains`(`apiKey`: kotlin.String): List<List<KeychainFeaturePointWrapper>> {
+    @Throws(DjiException::class)override fun `fetchKeychains`(`apiKey`: kotlin.String, `departmentWrapper`: DepartmentWrapper): List<List<KeychainFeaturePointWrapper>> {
             return FfiConverterSequenceSequenceTypeKeychainFeaturePointWrapper.lift(
     callWithPointer {
     uniffiRustCallWithError(DjiException) { _status ->
-    UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_fetch_keychains(
-        it, FfiConverterString.lower(`apiKey`),_status)
+    UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_method_djilogwrapper_fetch_keychains(
+        it, FfiConverterString.lower(`apiKey`),FfiConverterTypeDepartmentWrapper.lower(`departmentWrapper`),_status)
 }
     }
     )
@@ -1635,7 +1635,7 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
             return FfiConverterSequenceTypeFrameWrapper.lift(
     callWithPointer {
     uniffiRustCallWithError(DjiException) { _status ->
-    UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_frames(
+    UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_method_djilogwrapper_frames(
         it, FfiConverterOptionalSequenceSequenceTypeKeychainFeaturePointWrapper.lower(`keychains`),_status)
 }
     }
@@ -1651,7 +1651,7 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
             return FfiConverterTypeKeychainsRequestWrapper.lift(
     callWithPointer {
     uniffiRustCallWithError(DjiException) { _status ->
-    UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_keychains_request(
+    UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_method_djilogwrapper_keychains_request(
         it, _status)
 }
     }
@@ -1667,7 +1667,7 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
             return FfiConverterSequenceTypeRecordWrapper.lift(
     callWithPointer {
     uniffiRustCallWithError(DjiException) { _status ->
-    UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_records(
+    UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_method_djilogwrapper_records(
         it, FfiConverterOptionalSequenceSequenceTypeKeychainFeaturePointWrapper.lower(`keychains`),_status)
 }
     }
@@ -1682,7 +1682,7 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
             return FfiConverterUByte.lift(
     callWithPointer {
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_method_djilogwrapper_version(
+    UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_method_djilogwrapper_version(
         it, _status)
 }
     }
@@ -1704,7 +1704,7 @@ open class DjiLogWrapper: Disposable, AutoCloseable, DjiLogWrapperInterface
     @Throws(DjiException::class) fun `fromBytes`(`bytes`: kotlin.ByteArray): DjiLogWrapper {
             return FfiConverterTypeDJILogWrapper.lift(
     uniffiRustCallWithError(DjiException) { _status ->
-    UniffiLib.INSTANCE.uniffi_dji_log_parser_kotlin_fn_constructor_djilogwrapper_from_bytes(
+    UniffiLib.INSTANCE.uniffi_dji_log_parser_binding_fn_constructor_djilogwrapper_from_bytes(
         FfiConverterByteArray.lower(`bytes`),_status)
 }
     )
@@ -2245,6 +2245,43 @@ public object FfiConverterTypeDJIError : FfiConverterRustBuffer<DjiException> {
     }
 
 }
+
+
+
+
+enum class DepartmentWrapper {
+    
+    SDK,
+    DJIGO,
+    DJI_FLY,
+    AGRICULTURAL_MACHINERY,
+    TERRA,
+    DJI_GLASSES,
+    DJI_PILOT,
+    GS_PRO,
+    UNKNOWN;
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeDepartmentWrapper: FfiConverterRustBuffer<DepartmentWrapper> {
+    override fun read(buf: ByteBuffer) = try {
+        DepartmentWrapper.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: DepartmentWrapper) = 4UL
+
+    override fun write(value: DepartmentWrapper, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
 
 
 
